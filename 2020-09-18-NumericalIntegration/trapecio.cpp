@@ -35,7 +35,7 @@ double trapecio(fptr fun, double a, double b, int N)
     double suma = 0.5*(fun(a) + fun(b));
     for(int ii = 1; ii <= N-1; ++ii) {
         double xi = a + ii*h;
-        suma += f(xi);
+        suma += fun(xi);
     }
     suma *= h;
     return suma;
