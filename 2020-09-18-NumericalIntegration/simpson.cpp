@@ -6,6 +6,7 @@ using fptr  = double(double);
 using fptr2 = double(fptr, double, double, int);
 
 double f(double x);
+double g(double x);
 double trapecio(fptr fun, double a, double b, int N);
 double simpson(fptr fun, double a, double b, int N);
 double richardson(fptr2 alg, fptr fun, double a, double b, int N);
@@ -46,7 +47,7 @@ double trapecio(fptr fun, double a, double b, int N)
     double suma = 0.5*(fun(a) + fun(b));
     for(int ii = 1; ii <= N-1; ++ii) {
         double xi = a + ii*h;
-        suma += f(xi);
+        suma += fun(xi);
     }
     suma *= h;
     return suma;
@@ -60,5 +61,17 @@ double richardson(fptr2 alg, fptr fun, double a, double b, int N)
 double simpson(fptr fun, double a, double b, int N)
 {
     const double h = (b-a)/N;
+    double suma = 0; 
+    double aux1 = 0, aux2 = 0;
+
+    for(int ii = 1; ii <= N/2 -1; ++ii) {
+        double x = a + 2*ii*h;
+        aux1 += fun(x);
+    }
+    for(int ii = 1; ii <= N/2; ++ii) {
+        double x = a + (2*ii-1)*h;
+        aux2 += fun(x);
+    }
+    suma = h*(fun(a) + 2*aux1 + 4*aux2 + fun(b))/3;
     return suma;
 }
