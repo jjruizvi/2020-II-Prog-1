@@ -34,9 +34,9 @@ double bisection(double xl, double xu, double eps, fptr fun)
     int niter = 0;
     while (niter <= NITERMAX) {
         xr = 0.5*(xl + xu);
-        if (std::fabs(f(xr)) <= eps) {
+        if (std::fabs(fun(xr)) <= eps) {
             break;
-        } else if (f(xr)*f(xu) > 0) {
+        } else if (fun(xr)*fun(xu) > 0) {
             xu = xr;
         } else {
             xl = xr;

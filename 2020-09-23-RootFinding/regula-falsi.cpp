@@ -36,9 +36,9 @@ double bisection(double xl, double xu, double eps, fptr fun)
     int niter = 0;
     while (niter <= NITERMAX) {
         xr = 0.5*(xl + xu);
-        if (std::fabs(f(xr)) <= eps) {
+        if (std::fabs(fun(xr)) <= eps) {
             break;
-        } else if (f(xr)*f(xu) > 0) {
+        } else if (fun(xr)*fun(xu) > 0) {
             xu = xr;
         } else {
             xl = xr;
@@ -58,9 +58,9 @@ double regulafalsi(double xl, double xu, double eps, fptr fun)
         double fxu = fun(xu);
         double fxl = fun(xl);
         xr = xu - (fxu*(xl-xu))/(fxl - fxu);
-        if (std::fabs(f(xr)) <= eps) {
+        if (std::fabs(fun(xr)) <= eps) {
             break;
-        } else if (f(xr)*f(xu) > 0) {
+        } else if (fun(xr)*fun(xu) > 0) {
             xu = xr;
         } else {
             xl = xr;
