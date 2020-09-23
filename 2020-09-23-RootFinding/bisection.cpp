@@ -29,5 +29,5 @@ double f(double x)
 }
 double bisection(double xl, double xu, double eps, fptr fun)
 {
-    
+    return 0;
 }
