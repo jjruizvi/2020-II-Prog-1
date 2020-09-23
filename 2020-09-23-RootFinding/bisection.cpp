@@ -8,9 +8,9 @@ double bisection(double xl, double xu, double eps, fptr fun);
 int main(int argc, char **argv)
 {
     std::cout.precision(15); std::cout.setf(std::ios::scientific);
-    double xl = 0;
-    double xu = 10.0;
-    double eps = 1.0e-1;
+    double xl = 1;
+    double xu = 20.0;
+    double eps = 1.0e-2;
 
     double xroot = bisection(xl, xu, eps, f);
 
@@ -29,5 +29,20 @@ double f(double x)
 }
 double bisection(double xl, double xu, double eps, fptr fun)
 {
-    return 0;
+    const int NITERMAX = 1000;
+    double xr = 0;
+    int niter = 0;
+    while (niter <= NITERMAX) {
+        xr = 0.5*(xl + xu);
+        if (std::fabs(f(xr)) <= eps) {
+            break;
+        } else if (f(xr)*f(xu) > 0) {
+            xu = xr;
+        } else {
+            xl = xr;
+        }
+        niter++;
+    }
+    std::cout << "Bisection Info -> Niter: " << niter << "\n";
+    return xr;
 }
