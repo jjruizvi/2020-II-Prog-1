@@ -18,10 +18,19 @@ int main(int argc, char **argv)
     double eps = 1.0e-12;
     int nmax = 1000;
     double x0 = 10;
-    
+
+    // read params from file
+    std::ifstream fin("params.txt");
+    fin >> xl >> xu >> eps;
+    fin >> nmax;
+    fin >> x0;
+    fin.close();
+
+    // open file stream for data
     std::ofstream fout("info.txt");
     fout.precision(15); fout.setf(std::ios::scientific);
 
+    // compute roots by several methods
     double xroot = bisection(xl, xu, eps, f, nmax);
     fout << xroot << "\t" << f(xroot) << "\n";
     xroot = regulafalsi(xl, xu, eps, f, nmax);
