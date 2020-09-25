@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <cmath>
 
 using fptr = double(double);
@@ -12,21 +13,25 @@ double newton(double x0, double eps, fptr fun, fptr fderiv, int nitermax);
 
 int main(int argc, char **argv)
 {
-    std::cout.precision(15); std::cout.setf(std::ios::scientific);
     double xl = 1;
     double xu = 20.0;
     double eps = 1.0e-12;
     int nmax = 1000;
-    
-    double xroot = bisection(xl, xu, eps, f, nmax);
-    std::cout << xroot << "\t" << f(xroot) << "\n";
-    xroot = regulafalsi(xl, xu, eps, f, nmax);
-    std::cout << xroot << "\t" << f(xroot) << "\n";
     double x0 = 10;
+    
+    std::ofstream fout("info.txt");
+    fout.precision(15); fout.setf(std::ios::scientific);
+
+    double xroot = bisection(xl, xu, eps, f, nmax);
+    fout << xroot << "\t" << f(xroot) << "\n";
+    xroot = regulafalsi(xl, xu, eps, f, nmax);
+    fout << xroot << "\t" << f(xroot) << "\n";
     xroot = fixedpoint(x0, eps, g, f, nmax);
-    std::cout << xroot << "\t" << f(xroot) << "\n";
+    fout << xroot << "\t" << f(xroot) << "\n";
     xroot = newton(x0, eps, f, deriv, nmax);
-    std::cout << xroot << "\t" << f(xroot) << "\n";
+    fout << xroot << "\t" << f(xroot) << "\n";
+
+    fout.close();
 
     return 0;
 }
