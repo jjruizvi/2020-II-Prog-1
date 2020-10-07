@@ -2,27 +2,29 @@
 #include <algorithm>
 #include <numeric>
 #include <random>
+#include <vector>
 
-double statistics1(const double data[], int size);
-void fillarray(double data[], int size);
+double statistics1(const std::vector<double> & data);
+void fillarray(std::vector<double> & data);
 
 int main(int argc, char **argv)
 {
+    const int N = 1000;
     // array declaration
-    int N = 100000; 
-    double array [N] {0.0};
+    std::vector<double> array;
+    array.resize(N);
 
     // array filling
-    fillarray(array, N); 
+    fillarray(array);
     
     // processing
-    double result = statistics1(array, N);
+    double result = statistics1(array);
     std::cout << result << std::endl;
 
     return 0;
 }
 
-void fillarray(double data[], int size)
+void fillarray(std::vector<double> & data)
 {
     // double x = -19.8765;
     // std::fill(data, data+size, x);
@@ -31,19 +33,17 @@ void fillarray(double data[], int size)
     const int SEED = 0;
     std::mt19937 mt(SEED);
     std::uniform_real_distribution<double> dist(0.0, 1.0);
-    for (int ii = 0; ii < size; ++ii) {
-        data[ii] = dist(mt);
+    for (auto & val : data) {
+        val = dist(mt);
     }
 }
 
 
-double statistics1(const double data[], int size)
+double statistics1(const std::vector<double> & data)
 {
-    double mean = 0.0;
-
-    for(int ii = 0; ii < size; ++ii) {
-        mean += data[ii];
+    double suma = 0.0;
+    for(auto val : data) {
+        suma += val;
     }
-    
-    return mean/size;
+    return suma/data.size();
 }
