@@ -2,10 +2,10 @@
 
 int main(int argc, char **argv)
 {
-    int N = 5; 
+    const int N = 5; 
     int data [N] {1, 2};
     int * ptr = nullptr;
-    
+
     std::cout <<  data[0] << std::endl; // 1
     std::cout << &data[0] << std::endl; // direccion de memoria del primer elemento
     std::cout <<  data    << std::endl; // direccion del primer elemento
@@ -15,8 +15,8 @@ int main(int argc, char **argv)
     //std::cout << *(data+N)<< std::endl; // valor en la ultima? casilla
 
     std::cout << "prt -> " << ptr << std::endl;
-    ptr = &N;
-    std::cout << "prt -> " << ptr << std::endl;
+    //ptr = &N;
+    //std::cout << "prt -> " << ptr << std::endl;
     ptr = data;
     std::cout << "prt -> " << ptr << std::endl;
     std::cout << "*(prt+1): " << *(ptr+1) << std::endl;
