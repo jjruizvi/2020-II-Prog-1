@@ -24,7 +24,7 @@ int main(int argc, char **argv) {
     g.print();
     // operator overloading
     Fractional h;
-    h = f + g;
+    h = f + g; // f.operator+(g)
     h.print();
     h = f - g;
     h.print();
