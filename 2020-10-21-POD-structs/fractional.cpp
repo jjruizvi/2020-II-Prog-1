@@ -25,6 +25,12 @@ int main(int argc, char **argv) {
     Fractional h;
     h = plus(f, g); //h = f+g;
     print(h);
+    h = minus(f, g); //h = f+g;
+    print(h);
+    h = mult(f, g); //h = f+g;
+    print(h);
+    h = div(f, g); //h = f+g;
+    print(h);
     //h = f-g;
     //h = f*g;
     //h = f/g;
@@ -47,5 +53,29 @@ Fractional plus(const Fractional & f1, const Fractional & f2)
     Fractional result;
     result.num = f1.num*f2.den + f2.num*f1.den;
     result.den = f1.den*f2.den;
+    return result;
+}
+
+Fractional minus(const Fractional & f1, const Fractional & f2)
+{
+    Fractional result;
+    result.num = f1.num*f2.den - f2.num*f1.den;
+    result.den = f1.den*f2.den;
+    return result;
+}
+
+Fractional mult(const Fractional & f1, const Fractional & f2)
+{
+    Fractional result;
+    result.num = f1.num*f2.num;
+    result.den = f1.den*f2.den;
+    return result;
+}
+
+Fractional div(const Fractional & f1, const Fractional & f2)
+{
+    Fractional result;
+    result.num = f1.num*f2.den;
+    result.den = f1.den*f2.num;
     return result;
 }
