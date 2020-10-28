@@ -8,11 +8,11 @@ const double W = std::sqrt(K/M);
 const double T0 = 0.0;
 const double TF = 35;
 const double H = 0.1;
-const int NSTEPS = (TF)/H;
+const int NSTEPS = (TF-T0)/H;
 const int DIM = 2;
 
 typedef std::vector<double> state_t;
-using system_t = void(const state_t &, state_t &, double);
+using system_t = void(const state_t & y, state_t & dydt, double t);
 
 void euler(system_t deriv, state_t & data, double t, double h);
 void rk4(system_t deriv, state_t & data, double t, double h);
@@ -27,7 +27,7 @@ int main(void)
     for (int ii = 0; ii < NSTEPS; ++ii) {
         double t = T0 + ii*H;
         std::cout << t << "  " << y[0] << "   " << y[1] << "\n";
-        //euler(fderiv, y, t, H);
+        //euler(fderiv, y, t, H); 
         rk4(fderiv, y, t, H);
     }
       
@@ -36,8 +36,8 @@ int main(void)
 
 void fderiv(const state_t & y, state_t & dydt, double t)
 {
-    dydt[0] = y[1];
-    dydt[1] = -K*std::pow(y[0], 1)/M;
+    dydt[0] = y[1]; // dx/dt = v
+    dydt[1] = -K*std::pow(y[0], 1)/M; // dv/dt = a = -Kx/M = -W^2 x 
 }
 
 
